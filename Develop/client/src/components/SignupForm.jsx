@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-
-import { createUser } from '../utils/API';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';  // Import the ADD_USER mutation
 import Auth from '../utils/auth';
 
 const SignupForm = () => {
-  // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
   const [validated] = useState(false);
-  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+
+  // useMutation hook to call the ADD_USER mutation
+  const [addUser, { error }] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -20,7 +20,6 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -28,20 +27,23 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await createUser(userFormData);
+      // Call the addUser mutation and pass in the form data
+      const { data } = await addUser({
+        variables: { ...userFormData },  // Send the username, email, and password to the mutation
+      });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const { token, user } = await response.json();
+      // Extract the token and user data from the mutation response
+      const { token, user } = data.addUser;
       console.log(user);
+      
+      // Log the user in by saving the token
       Auth.login(token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
     }
 
+    // Clear the form fields
     setUserFormData({
       username: '',
       email: '',
@@ -51,10 +53,8 @@ const SignupForm = () => {
 
   return (
     <>
-      {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert || error} variant='danger'>
           Something went wrong with your signup!
         </Alert>
 
