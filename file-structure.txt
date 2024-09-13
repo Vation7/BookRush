@@ -1,0 +1,48 @@
+.
+├── Develop
+│   ├── client
+│   │   ├── index.html
+│   │   ├── package.json
+│   │   ├── public
+│   │   │   └── vite.svg
+│   │   ├── src
+│   │   │   ├── App.css
+│   │   │   ├── App.jsx
+│   │   │   ├── assets
+│   │   │   │   └── react.svg
+│   │   │   ├── components
+│   │   │   │   ├── LoginForm.jsx
+│   │   │   │   ├── Navbar.jsx
+│   │   │   │   └── SignupForm.jsx
+│   │   │   ├── main.jsx
+│   │   │   ├── pages
+│   │   │   │   ├── SavedBooks.jsx
+│   │   │   │   └── SearchBooks.jsx
+│   │   │   └── utils
+│   │   │       ├── API.js
+│   │   │       ├── auth.js
+│   │   │       └── localStorage.js
+│   │   └── vite.config.js
+│   ├── package.json
+│   └── server
+│       ├── config
+│       │   └── connection.js
+│       ├── controllers
+│       │   └── user-controller.js
+│       ├── models
+│       │   ├── Book.js
+│       │   ├── User.js
+│       │   └── index.js
+│       ├── package.json
+│       ├── routes
+│       │   ├── api
+│       │   │   ├── index.js
+│       │   │   └── user-routes.js
+│       │   └── index.js
+│       ├── server.js
+│       └── utils
+│           └── auth.js
+├── README.md
+└── file-structure.txt
+
+16 directories, 30 files
