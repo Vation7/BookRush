@@ -5,6 +5,7 @@ const db = require('./config/connection');  // MongoDB connection
 const routes = require('./routes');
 const { typeDefs, resolvers } = require('./schemas');  // GraphQL schema and resolvers
 const authMiddleware = require('./utils/auth');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,7 +16,10 @@ app.use(express.json());
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
+  const buildPath = path.join(__dirname, '../client/build');
+  if (fs.existsSync(buildPath)) {
+    app.use(express.static(buildPath));
+  }
 }
 
 // Health check route (optional, for debugging)
