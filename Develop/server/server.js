@@ -18,6 +18,11 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
+// Health check route (optional, for debugging)
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 // Apollo Server setup
 const startApolloServer = async () => {
   const server = new ApolloServer({
@@ -32,12 +37,10 @@ const startApolloServer = async () => {
   // If you still have any REST routes, leave this line
   app.use(routes);
 
-  // Connect to MongoDB and start the server
-  db.once('open', () => {
-    app.listen(PORT, () => {
-      console.log(`🌍 Now listening on http://localhost:${PORT}`);
-      console.log(`GraphQL path: http://localhost:${PORT}${server.graphqlPath}`);
-    });
+  // Start the server
+  app.listen(PORT, () => {
+    console.log(`🌍 Now listening on port ${PORT}`);
+    console.log(`GraphQL path: http://localhost:${PORT}${server.graphqlPath}`);
   });
 };
 
