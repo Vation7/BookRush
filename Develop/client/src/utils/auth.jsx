@@ -1,6 +1,5 @@
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import AuthService from './utils/auth'; // Assuming this is the client-side auth.js
 
 const httpLink = createHttpLink({
   uri: '/graphql', // your GraphQL endpoint

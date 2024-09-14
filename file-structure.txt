@@ -20,8 +20,10 @@
 │   │   │   │   └── SearchBooks.jsx
 │   │   │   └── utils
 │   │   │       ├── API.js
-│   │   │       ├── auth.js
-│   │   │       └── localStorage.js
+│   │   │       ├── auth.jsx
+│   │   │       ├── localStorage.js
+│   │   │       ├── mutations.js
+│   │   │       └── queries.js
 │   │   └── vite.config.js
 │   ├── package.json
 │   └── server
@@ -39,10 +41,14 @@
 │       │   │   ├── index.js
 │       │   │   └── user-routes.js
 │       │   └── index.js
+│       ├── schemas
+│       │   ├── index.js
+│       │   ├── resolvers.js
+│       │   └── typeDefs.js
 │       ├── server.js
 │       └── utils
 │           └── auth.js
 ├── README.md
 └── file-structure.txt
 
-16 directories, 30 files
+17 directories, 35 files
