@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-  const distPath = path.join(__dirname, '../../client/dist'); // Adjusted path to '../../client/dist'
+  const distPath = path.join(__dirname, '../client/dist'); // Corrected path
   app.use(express.static(distPath));
 
   // Catch-all route to serve the React app
