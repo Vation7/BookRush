@@ -15,19 +15,14 @@ app.use(express.json());
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-  const distPath = path.join(__dirname, '../client/dist'); // Corrected path
+  const distPath = path.join(__dirname, '../client/dist'); // Correct relative path
   app.use(express.static(distPath));
 
   // Catch-all route to serve the React app
   app.get('*', (req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
+    res.sendFile(path.join(distPath, 'index.html')); // Serve index.html from dist
   });
 }
-
-// Health check route (optional, for debugging)
-app.get('/health', (req, res) => {
-  res.status(200).send('OK');
-});
 
 // Apollo Server setup
 const startApolloServer = async () => {
