@@ -2,7 +2,7 @@
 ├── Develop
 │   ├── client
 │   │   ├── dist
-│   │   │   └── index.html
+│   │   ├── index.html
 │   │   ├── package.json
 │   │   ├── public
 │   │   │   └── vite.svg
