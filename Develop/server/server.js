@@ -16,9 +16,9 @@ app.use(express.json());
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-  const buildPath = path.join(__dirname, '../client/build');
-  if (fs.existsSync(buildPath)) {
-    app.use(express.static(buildPath));
+  const distPath = path.join(__dirname, '../client/dist'); // Updated to 'dist'
+  if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
   }
 }
 
@@ -40,6 +40,16 @@ const startApolloServer = async () => {
 
   // If you still have any REST routes, leave this line
   app.use(routes);
+
+  // Catch-all route to serve the React app
+  app.get('*', (req, res) => {
+    const indexPath = path.join(__dirname, '../client/dist/index.html'); // Updated to 'dist'
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.status(404).send('Not Found');
+    }
+  });
 
   // Start the server
   app.listen(PORT, () => {
