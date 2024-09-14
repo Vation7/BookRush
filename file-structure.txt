@@ -1,7 +1,8 @@
 .
 ├── Develop
 │   ├── client
-│   │   ├── index.html
+│   │   ├── dist
+│   │   │   └── index.html
 │   │   ├── package.json
 │   │   ├── public
 │   │   │   └── vite.svg
@@ -51,4 +52,4 @@
 ├── README.md
 └── file-structure.txt
 
-17 directories, 35 files
+18 directories, 35 files
